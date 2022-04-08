@@ -22,14 +22,16 @@ xd = [3, 3, 4, 2]
 
 def srednia(lista):
     v1 = np.array(lista)
-    suma = sum(v1)
+    v2 = np.ones(len(v1))
+    suma = np.dot(v2, v1)
     return suma/len(v1)
 
 
 def wariancja(lista):
-    v = np.array(lista)
-    v = v - srednia(lista)
-    return np.dot(v, v)/len(v)
+    v1 = np.array(lista)
+    v2 = np.ones(len(v1)) * srednia(lista)
+    roznica = v1-v2
+    return np.dot(roznica, roznica)/len(v1)
 
 
 def odchylenie(lista):
@@ -37,6 +39,5 @@ def odchylenie(lista):
 
 
 print(srednia(xd))
-print(odchylenie(xd))
 print(wariancja(xd))
-nowy = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+print(odchylenie(xd))

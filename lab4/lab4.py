@@ -113,6 +113,10 @@ def decyzja(who, lista, k):
 #         for j in range(len(lista)):
 #             if lista[i][len(lista[i])-1] == 1 and lista[j][len(lista[j])-1] == 1:
 
+def wagaKropki(element):
+    return element[len(element)-1]
+
+
 def najmniejsza(lista):
     n = lista[0]
     id = 0
@@ -132,18 +136,18 @@ def srodek(lista):
     wynik1 = []
     for i in range(len(lista)):
         for j in range(len(lista)):
-            if lista[i][len(lista[i])-1] == 1 and lista[j][len(lista[j])-1] == 1:
+            if wagaKropki(lista[i]) == wagaKropki(lista[j]) and wagaKropki(lista[i]) == 1:
                 suma1 += metrykaEuklidesowa(lista[i], lista[j])
-            elif lista[i][len(lista[i])-1] == 0 and lista[j][len(lista[j])-1] == 0:
+            elif wagaKropki(lista[i]) == wagaKropki(lista[j]) and wagaKropki(lista[i]) == 0:
                 suma0 += metrykaEuklidesowa(lista[i], lista[j])
         if suma0 != 0:
             wynik0.append(suma0)
         elif suma1 != 0:
             wynik1.append(suma1)
+# tu zrobić for na 10 iteracji ze sprawdzaniem odległości od kroperk i przypisać wartości
+
     print(najmniejsza(wynik0))
     print(najmniejsza(wynik1))
-    # print(suma0)
-    # print(suma1)
 
 
 srodek(lista)
