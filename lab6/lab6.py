@@ -8,8 +8,10 @@ print(x.T)
 def wtf(x, y):
     x = np.array(x)
     y = np.array(y)
-    xd = x.T * x.I
-    result = xd * y
+    kwadrat = np.dot(x.T, x)
+    odwrocona = np.linalg.inv(kwadrat)
+    mnozenie = np.dot(odwrocona, x.T)
+    result = np.dot(mnozenie, y)
     return result
 
 
