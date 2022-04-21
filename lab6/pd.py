@@ -1,9 +1,9 @@
-from unittest import result
 import numpy as np
 import math
 
-A = np.array([[1, 0], [1, 1], [0, 1]])
-# A = np.array(A)
+# A = np.array([[1, 0], [1, 1], [0, 1]])
+A = np.array([[1, 0], [1, 1], [1, 1]])
+# A = np.array([[3, 2], [1, 5], [1, 0]])
 
 
 def kreseczki(vector):
@@ -37,14 +37,11 @@ def upo(A):
     return np.array(Q.T)
 
 
-# print(kreseczki(A[0]))
-# print(projekcja(A[0], A[1]))
 Q = upo(A)
-R = np.dot(Q.T, A)
-xd = np.dot(Q, R)
+R = np.round(np.dot(Q.T, A), decimals=5)
+xd = np.round(np.dot(Q, R), decimals=5)
 
 print(A)
 print(Q)
 print(R)
-print("nsdjnsjnfknskd")
 print(xd)
