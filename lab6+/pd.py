@@ -3,8 +3,9 @@ import math
 
 # A = np.array([[1, 0], [1, 1], [0, 1]])
 # A = np.array([[1, 0], [1, 1], [1, 1]])
+A = np.array([[0, 1], [2, 3], [4, 5]])
 # A = np.array([[3, 2], [1, 5], [1, 0]])
-A = np.array([[3, 2], [1, 5]])
+# A = np.array([[3, 2], [1, 5]])
 
 
 def dlugosc(vector):
@@ -61,10 +62,10 @@ def wartosci_wlasne(A):
 
 
 # ak = a_plus_k(A, 10)
-# print(A)
-# print(Q)
+print(A)
+print(Q)
 # print(R)
 # print(wynik)
 # print(ak)
-wynik = wartosci_wlasne(A)
-print(wynik)
+# wynik = wartosci_wlasne(A)
+# print(wynik)
