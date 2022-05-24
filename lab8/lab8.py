@@ -3,9 +3,11 @@ import numpy as np
 import math
 B = [[1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, -1, -1, -1, -1], [1, 1, -1, -1, 0, 0, 0,  0], [0, 0, 0, 0, 1,  1, -1, -1],
      [1, -1, 0, 0, 0, 0, 0, 0], [0, 0, 1, -1, 0, 0, 0,  0], [0, 0, 0, 0, 1, -1, 0, 0], [0, 0, 0, 0, 0, 0, 1, -1]]
+
+wektor = [8, 6, 2, 3, 4, 6, 6, 5]
 B = np.array(B)
 B = B.T
-eo = np.dot(B.T, B)
+B2 = np.dot(B.T, B)
 
 
 def dlugosc(vector):
@@ -24,10 +26,20 @@ def czyOrtogonalna(B):
     return True
 
 
+def czyOrtonormalna(B):
+    C = np.round(np.dot(B.T, B), decimals=5)
+    return czyJednostkowa(C)
+
+
+def czyJednostkowa(B):
+    for i in range(len(B)):
+        for j in range(len(B[0])):
+            if i == j and B[i][j] != 1:
+                return False
+    return True
+
+
 def normalizajcaWektora(vector):
-    # print(vector)
-    # print(dlugosc(vector))
-    # print(vector/dlugosc(vector))
     return vector/dlugosc(vector)
 
 
@@ -39,11 +51,18 @@ def normalizacjaWMacierzy(B):
     return np.array(X)
 
 
+def wektorPrzezMacierz(wektor, bazaP, bazaN):
+    if czyOrtonormalna(bazaN):
+        if czyJednostkowa(bazaP):
+            return np.dot(bazaN.T, wektor)
+        return np.dot(np.dot(bazaN.T, bazaP), wektor)
+    return np.dot(np.dot(np.linalg.inv(bazaN), bazaP), wektor)
+
+
 print(B)
-print(eo)
-print(czyOrtogonalna(eo))
+
+print(czyOrtogonalna(B2))
 
 C = normalizacjaWMacierzy(B)
-xd = np.round(np.dot(C.T, C), decimals=5)
-print(C)
-print(xd)
+
+print(czyJednostkowa(C))
