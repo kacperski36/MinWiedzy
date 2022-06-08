@@ -5,7 +5,7 @@ x = np.array(x)
 print(x.T)
 
 
-def wtf(x, y):
+def zad(x, y):
     x = np.array(x)
     y = np.array(y)
     kwadrat = np.dot(x.T, x)
@@ -15,4 +15,4 @@ def wtf(x, y):
     return result
 
 
-print(wtf(x, y))
+print(zad(x, y))

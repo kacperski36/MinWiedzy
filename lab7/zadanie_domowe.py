@@ -4,7 +4,10 @@ import math
 # A = np.array([[1, 0], [1, 1], [0, 1]])
 # A = np.array([[1, 0], [1, 1], [1, 1]])
 # A = np.array([[0, 1], [2, 3], [4, 5]])
-A = np.array([[3, 2, 1], [1, 5, 0], [1, 0, 4]])
+# A = np.array([[3, 2, 1], [1, 5, 0], [1, 0, 4]])
+A = np.array([[1, 2, 2], [2, 8, 0], [2, 0, 4]])
+B = np.array([[1, 1], [0, 1], [-1, 1]])
+D = np.array([[1, -2, 0], [0, -2, 1]])
 
 
 def dlugosc(vector):
@@ -20,7 +23,7 @@ def projekcja(u, v):
     return (l/m)*u
 
 
-def macierzQ(A):
+def macierzQR(A):
     proj = 0
     all_v = []
     all_u = []
@@ -45,33 +48,28 @@ def macierzQ(A):
             e = u/dlugosc(u)
             Q.append(e)
     Q = np.array(Q)
-    return Q.T
+    Q = Q.T
+    R = np.round(np.dot(Q.T, A), decimals=5)
+    return Q.T, R
 
 
 def a_plus_k(A, k):
-    Q = macierzQ(A)
     if len(A) == len(A[0]):
         for i in range(k):
-            Q = macierzQ(A)
-            R = np.round(np.dot(Q.T, A), decimals=5)
+            Q, R = macierzQR(A)
             A = np.round(np.dot(R, Q), decimals=5)
     return A
 
 
 def wartosci_wlasne(A):
-    new_A = A
-    while (np.diag(new_A) - np.dot(new_A, np.ones((len(new_A), 1))).T).all() > 0.001:
-        new_A = a_plus_k(new_A, 1)
-    return np.diag(new_A)
+    A2 = A
+    while (np.diag(A2) - np.dot(A2, np.ones((len(A2), 1))).T).all() > 0.001:
+        A2 = a_plus_k(A2, 1)
+    return np.round(np.diag(A2), decimals=0)
 
 
-Q = macierzQ(A)
-
-# R = np.round(np.dot(Q.T, A), decimals=5)
-# xd = np.round(np.dot(Q, R), decimals=5)
-
-
-print(Q)
-print(A)
-# print(xd)
-# print(eo)
+print(D)
+C = np.dot(D.T, D)
+print(C)
+print(wartosci_wlasne(C))
+print(np.dot(C, np.ones((len(C), 1))).T)
